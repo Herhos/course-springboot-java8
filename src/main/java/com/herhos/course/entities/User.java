@@ -3,6 +3,16 @@ package com.herhos.course.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+//015// Edição do src/main/resources/application.properties
+//016// Criação do src/main/resources/application-test.properties
+
+//017//
+@Entity
 public class User implements Serializable
 {
 	//006//
@@ -11,6 +21,9 @@ public class User implements Serializable
 	//002//
 	// ATRIBUTOS BÁSICOS
 	
+	//018//
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
