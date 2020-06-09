@@ -2,17 +2,22 @@
 package com.herhos.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 //015// Edição do src/main/resources/application.properties
 //016// Criação do src/main/resources/application-test.properties
 
 //017//
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable
 {
 	//006//
@@ -31,6 +36,10 @@ public class User implements Serializable
 	private String password;	
 	
 	// ASSOCIAÇÕES
+	
+	//037//
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
 	
 	//003//
 	// CONSTRUTORES
@@ -90,6 +99,11 @@ public class User implements Serializable
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	//038//
+	public List<Order> getOrders() {
+		return orders;
+	}
 
 	//005//
 	// HASCODE E EQUALS
@@ -123,7 +137,7 @@ public class User implements Serializable
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}	
+	}		
 	
 	// MÉTODOS AUXILIARES ESPECÍFICOS
 	
