@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //015// Edição do src/main/resources/application.properties
 //016// Criação do src/main/resources/application-test.properties
 
@@ -38,6 +40,7 @@ public class User implements Serializable
 	// ASSOCIAÇÕES
 	
 	//037//
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
