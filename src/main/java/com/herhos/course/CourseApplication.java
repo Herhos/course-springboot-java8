@@ -1,3 +1,6 @@
+/* Código de autoria do Professor Nélio Alves, parte
+ * integrante do curso Java Completo / Udemy */
+
 package com.herhos.course;
 
 import org.springframework.boot.SpringApplication;
