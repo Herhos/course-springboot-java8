@@ -1,4 +1,3 @@
-//056//
 package com.herhos.course.entities;
 
 import java.io.Serializable;

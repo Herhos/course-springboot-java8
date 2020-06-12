@@ -1,4 +1,3 @@
-//034//
 package com.herhos.course.entities;
 
 import java.io.Serializable;
@@ -6,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,11 +22,9 @@ import com.herhos.course.entities.enums.OrderStatus;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable
-{
-	//042//
+{	
 	private static final long serialVersionUID = 1L;
-	
-	//035//
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -34,16 +33,17 @@ public class Order implements Serializable
 	private Instant moment;
 	
 	private Integer orderStatus;
-	
-	//036//
+		
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
 	
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
+	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	private Payment payment;	
 
-	//039//
 	public Order() {
 		super();
 	}
@@ -55,8 +55,7 @@ public class Order implements Serializable
 		setOrderStatus(orderStatus);
 		this.client = client;
 	}
-
-	//040//
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,7 +98,14 @@ public class Order implements Serializable
 		return items;
 	}
 	
-	//041//
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
